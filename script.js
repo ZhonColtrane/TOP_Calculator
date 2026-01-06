@@ -52,6 +52,9 @@ function multiply(a,b) {
 }
 
 function divide(a,b) {
+    if (b==0) {
+        return "Uhhh No"
+    }
     return a / b;
 }
 function modulus(a,b) {
@@ -102,6 +105,9 @@ numberButtons.forEach((button) => {
 //Operator event listeners
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
+        if (operand1 !== null && operand2 !== null){
+            return
+        }
         if (operand1 === null) {
             if (e.target.textContent == "=") {
                 return
@@ -120,6 +126,7 @@ operatorButtons.forEach((button) => {
             currentValue = operate(operator,operand1,operand2)
             updateCurrentNumber();
         }
+
     })
 })
 
