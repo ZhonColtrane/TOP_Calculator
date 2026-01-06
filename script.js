@@ -2,8 +2,9 @@
 let operand1 = null;
 let operand2 = null;
 let operator = null;
-let displayValue = "";
-const display = document.querySelector('.display');
+let currentValue = "";
+let completeOperation = "";
+const currentNumber = document.querySelector('#currentNumber');
 const zeroBtn = document.querySelector('#zero');
 const oneBtn = document.querySelector('#one');
 const twoBtn = document.querySelector('#two');
@@ -44,17 +45,19 @@ function operate(operator, operand1, operand2){
 }
 
 //Update display
-function updateDisplay() {
-    display.textContent = displayValue;
+function updateCurrentNumber() {
+    currentNumber.textContent = currentValue;
 }
 numberButtons.forEach((button) => {
     
     button.addEventListener('click', (e) => {
-        if (displayValue === "") {
-        displayValue = e.target.textContent;
+        if (currentValue === "") { //First entry
+        currentValue = e.target.textContent;
+    }   else if (e.target.textContent === '.' && currentValue.includes('.')) { //prevent multiple decimals
+        return;
     }   else {
-        displayValue += e.target.textContent;
+        currentValue += e.target.textContent; //Any entry but the first or second decimal
     }
-        updateDisplay();
+        updateCurrentNumber();
     })
 })
