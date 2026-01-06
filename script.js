@@ -90,6 +90,7 @@ function updateCompleteOperation() {
     completeOperationDisplay.textContent = completeOperation;
 }
 
+//Numbers
 numberButtons.forEach((button) => {
     
     button.addEventListener('click', (e) => {
@@ -97,7 +98,9 @@ numberButtons.forEach((button) => {
         currentValue = e.target.textContent;
     }   else if (e.target.textContent === '.' && currentValue.includes('.')) { //prevent multiple decimals
         return;
-    }   else {
+    }   else if (completeOperation.includes('=')) {
+            currentValue = e.target.textContent;
+        } else {
         currentValue += e.target.textContent; //Any entry but the first or second decimal
     }
         updateCurrentNumber();
@@ -107,7 +110,7 @@ numberButtons.forEach((button) => {
 //Operator event listeners
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
-        if (operand1 !== null && operand2 !== null){
+        if (operand1 !== null && operand2 !== null){ //Prevent more than 1 operation at a time
             return
         }
         if (operand1 === null) {
@@ -127,6 +130,9 @@ operatorButtons.forEach((button) => {
             updateCompleteOperation();
             currentValue = operate(operator,operand1,operand2)
             updateCurrentNumber();
+            //Reset to allow for further operations
+            operand1 = currentValue;
+            operand2 = 0;
         }
 
     })
