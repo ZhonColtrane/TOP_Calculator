@@ -94,15 +94,16 @@ function updateCompleteOperation() {
 numberButtons.forEach((button) => {
     
     button.addEventListener('click', (e) => {
+        if (completeOperation.includes('=')) {
+            clear();
+        } 
         if (currentValue === 0) { //First entry or first entry after operator
-        currentValue = e.target.textContent;
-    }   else if (e.target.textContent === '.' && currentValue.includes('.')) { //prevent multiple decimals
-        return;
-    }   else if (completeOperation.includes('=')) {
             currentValue = e.target.textContent;
-        } else {
+        }   else if (e.target.textContent === '.' && currentValue.includes('.')) { 
+            //prevent multiple decimals
+            return;
         currentValue += e.target.textContent; //Any entry but the first or second decimal
-    }
+        }
         updateCurrentNumber();
     })
 })
@@ -147,12 +148,7 @@ functionButtons.forEach((button) => {
                 currentValue = parseFloat(currentValue.toString().slice(0,-1));
                 break;
             case "clear":
-                operand1 = null;
-                operand2 = null;
-                operator = null;
-                currentValue = 0;
-                completeOperation ="";
-                updateCompleteOperation() 
+                clear();
                 break;
             case "posNeg":
                 currentValue *= -1;
@@ -161,3 +157,14 @@ functionButtons.forEach((button) => {
         updateCurrentNumber();
     })
 })
+
+//Clear
+function clear() {
+    operand1 = null;
+    operand2 = null;
+    operator = null;
+    currentValue = 0;
+    completeOperation ="";
+    updateCompleteOperation() 
+    updateCurrentNumber()
+}
