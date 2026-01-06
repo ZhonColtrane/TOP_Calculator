@@ -23,6 +23,9 @@ const divideBtn = document.querySelector('#divide');
 const equalsBtn = document.querySelector('#equals');
 const clearBtn = document.querySelector('#clear');
 const numberButtons = document.querySelectorAll('.number');
+const posNegBtn = document.querySelector('#posNeg');
+const deleteBtn = document.querySelector('#delete');
+const modulusBtn = document.querySelector('#modulus');
 
 //Operation functions
 function add(a,b) {
