@@ -81,7 +81,9 @@ function operate(operator, operand1, operand2){
 
 //Update display
 function updateCurrentNumber() {
-    if (isNaN(currentValue)){currentValue=0};
+    if (isNaN(currentValue) && currentValue !="Uhhh No"){
+        currentValue=0;
+    }
     currentNumber.textContent = currentValue;
 }
 function updateCompleteOperation() {
